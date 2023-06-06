@@ -1,5 +1,6 @@
 let state = 'StartScreen';
 let currentLevel = 0;
+
 function updateLevel(currentLevel) {
   currentLevel++;
   console.log(currentLevel);
@@ -13,7 +14,7 @@ function CheckState() {
       break;
     case 'game':
       startScreen.style.display = 'none';
-      PlayGame();
+      level.playGame();
       break;
   }
 }

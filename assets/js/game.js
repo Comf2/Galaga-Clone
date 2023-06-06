@@ -6,14 +6,7 @@ let gamePlaying = false;
 //TODO: Make a level class, and initting level functionality
 //make initial animation connected to level class
 //make a level manager
-const playerDims = {
-  width: 64,
-  height: 61,
-};
-const gameStartPos = {
-  x: window.innerWidth / 2 - playerDims.width / 2,
-  y: window.innerHeight - 100,
-};
+
 const player = new Sprite(
   playerImage,
   playerDims.width,
@@ -22,22 +15,21 @@ const player = new Sprite(
   gameStartPos.y + 120
 );
 
-const playStartAnim = () => {
-  if (player.positions.y === window.innerHeight - 100) gamePlaying = true;
-  player.positions.y--;
-  console.log('hello');
-};
+// const playStartAnim = () => {
+//   if (player.positions.y === window.innerHeight - 100) gamePlaying = true;
+//   player.positions.y--;
+// };
 
-const PlayGame = () => {
-  player.draw(0, 0);
+// const PlayGame = () => {
+//   player.draw(0, 0);
 
-  if (!gamePlaying) {
-    playStartAnim();
-    return;
-  }
-};
+//   if (!gamePlaying) {
+//     playStartAnim();
+//     return;
+//   }
+// };
 
-const StartGame = () => {
-  //run start game animation
-  let gamePlaying = false;
-};
+// const StartGame = () => {
+//   //run start game animation
+//   gamePlaying = false;
+// };

@@ -17,6 +17,6 @@ Update();
 document.addEventListener('keydown', (e) => {
   if (state === 'StartScreen') {
     state = 'game';
-    StartGame();
+    level.StartGame();
   }
 });
