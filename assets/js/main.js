@@ -6,10 +6,11 @@ gameArea.width = window.innerWidth;
 gameArea.height = window.innerHeight;
 
 function Update() {
-  requestAnimationFrame(Update);
   c.fillStyle = '#000000';
   c.fillRect(0, 0, window.innerWidth, window.innerHeight);
   CheckState();
+
+  requestAnimationFrame(Update);
 }
 Update();
 
