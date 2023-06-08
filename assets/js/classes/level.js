@@ -39,24 +39,25 @@ class Level {
         enemyAmmountMulti = 0;
         availEnemies = [stickBug_Data, galaga_Data, bee_Data];
         //level 1
-        const enemyspacing = this.GetEnemySpacing(
-          10 + enemyAmmountMulti,
-          dims.enemy.stickbug.width
-        );
 
         for (let i = 0; i < 10 + enemyAmmountMulti; i++) {
           //TODO: make sprite turn to "enemy" class
           const curEnemy = Math.floor(Math.random() * availEnemies.length);
+
+          const enemyspacing = this.GetEnemySpacing(
+            10 + enemyAmmountMulti,
+            availEnemies[curEnemy].width
+          );
           const enemy = new Character(
             availEnemies[curEnemy].image,
             availEnemies[curEnemy].width,
             availEnemies[curEnemy].height,
-            dims.enemy.stickbug.width +
-              (enemyspacing * i + dims.enemy.stickbug.width * i),
+            availEnemies[curEnemy].width / 2 +
+              (enemyspacing * i + availEnemies[curEnemy].width * i),
             gameStartPos.enemy.y - 120,
             2,
             0,
-            'down'
+            180
           );
           this.enemies.push(enemy);
         }

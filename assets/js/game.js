@@ -15,5 +15,5 @@ const player = new Character(
   gameStartPos.player.y + 120,
   1,
   0,
-  'up'
+  0
 );

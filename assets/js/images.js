@@ -26,3 +26,16 @@ const beeImg = new Image();
 
 beeImg.src = beeSrc;
 beeImg.crossOrigin = true;
+
+// -- misc sprites -- //
+const playerPrjSrc = './assets/images/sprite-sheets/player-projectile.png';
+const playerPrjImg = new Image();
+
+playerPrjImg.src = playerImageSrc;
+playerPrjImg.crossOrigin = true;
+
+const enemyPrjSrc = './assets/images/sprite-sheets/enemy-projectile.png';
+const enemyPrjImg = new Image();
+
+enemyPrjImg.src = enemyImageSrc;
+enemyPrjImg.crossOrigin = true;

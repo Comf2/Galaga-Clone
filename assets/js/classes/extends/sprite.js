@@ -1,6 +1,6 @@
 class Sprite {
   //gets the image, the sprite width and height, the sprites x, and y, and the canvas x, and y
-  constructor(image, sWidth, sHeight, x, y, frameX, frameY, dir) {
+  constructor(image, sWidth, sHeight, x, y, frameX, frameY) {
     this.image = image;
     this.width = sWidth;
     this.height = sHeight;

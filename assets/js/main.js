@@ -29,6 +29,9 @@ document.addEventListener('keydown', (e) => {
       player.movement.movingDown = true;
     } else if (e.key === 'a' || e.key === 'ArrowLeft') {
       player.movement.movingLeft = true;
+    } else if (e.code === 'Space' && player.canFire) {
+      player.canFire = false;
+      player.Fire(player.currentDir);
     }
   }
 });
