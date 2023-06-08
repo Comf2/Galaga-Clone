@@ -1,6 +1,6 @@
 class Sprite {
   //gets the image, the sprite width and height, the sprites x, and y, and the canvas x, and y
-  constructor(image, sWidth, sHeight, x, y) {
+  constructor(image, sWidth, sHeight, x, y, frameX, frameY, dir) {
     this.image = image;
     this.width = sWidth;
     this.height = sHeight;
@@ -8,24 +8,17 @@ class Sprite {
       x: x,
       y: y,
     };
+
+    this.frames = {
+      x: frameX,
+      y: frameY,
+    };
   }
-  draw(frameX, frameY) {
-    // c.drawImage(
-    //   this.image,
-    //   //will draw frame we're at on sprite sheet,
-    //   this.width * frameX,
-    //   this.height * frameY,
-    //   this.width,
-    //   this.height,
-    //   this.positions.x, //where to draw on canvas
-    //   this.positions.y,
-    //   this.scaledWidth, //size
-    //   this.scaledHeight
-    // );
+  draw() {
     c.drawImage(
       this.image,
-      this.width * frameX,
-      this.height * frameY,
+      this.width * this.frames.x,
+      this.height * this.frames.y,
       this.width,
       this.height,
       this.positions.x,
