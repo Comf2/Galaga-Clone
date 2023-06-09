@@ -1,7 +1,16 @@
-class Projectile extends Sprite {
-  constructor(image, sWidth, sHeight, x, y, frameX, frameY, dir) {
-    super(image, sWidth, sHeight, x, y, frameX, frameY, dir);
-    this.isFiring = false;
+class ProjectileClass extends Sprite {
+  constructor(image, sWidth, sHeight, x, y, startPos, endPos, moveCount) {
+    super(image, sWidth, sHeight, x, y);
+    this.isFiring = true;
+    this.startPos = {
+      x: startPos.x,
+      y: startPos.y,
+    };
+    this.endPos = {
+      x: endPos.x,
+      y: endPos.y,
+    };
+    this.moveCount = moveCount;
   }
   Fire() {
     if (!this.isFiring) return;
@@ -15,13 +24,41 @@ class Projectile extends Sprite {
       this.isFiring = false;
       return;
     }
-    const hit = Hit();
+    const hit = this.Hit();
     if (hit.didHit === true) {
       this.isFiring = false;
       hit.enemy.damage(10);
       return;
     }
-    requestAnimationFrame(Fire);
+    //not off screen didn't hit. Do Ray!
+    const fireDir = this.GetFirePos(this.startPos, this.endPos);
+    this.startPos.x = fireDir.x;
+    this.startPos.y = fireDir.y;
+    this.positions.x = fireDir.x;
+    this.positions.y = fireDir.y;
+
+    requestAnimationFrame(this.Fire.bind(this));
+  }
+  GetFirePos(s, e) {
+    //do formula to get new value
+    //update positions.x
+    console.log('starting pos >>', s);
+    const dp = {
+      y: s.y - e.y,
+      x: s.x - e.x,
+    };
+    console.log('delta pos >>', dp);
+    const fp = {
+      y: dp.y / this.moveCount,
+      x: dp.x / this.moveCount,
+    };
+    console.log('final pos >>', fp);
+    const np = {
+      y: s.y + fp.y,
+      x: s.x + fp.x,
+    };
+    console.log('nth pos >>', np);
+    return np;
   }
   Hit() {
     //check if projectile hit any enemy
@@ -32,4 +69,10 @@ class Projectile extends Sprite {
       didHit: false,
     };
   }
+}
+
+const createProjectile = () => ({})
+
+export { 
+  ProjectileClass
 }

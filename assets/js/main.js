@@ -31,7 +31,13 @@ document.addEventListener('keydown', (e) => {
       player.movement.movingLeft = true;
     } else if (e.code === 'Space' && player.canFire) {
       player.canFire = false;
-      player.Fire(player.currentDir);
+      player.Fire(
+        {
+          x: player.positions.x,
+          y: window.innerHeight * player.currentDir,
+        },
+        playerPrjImg
+      );
     }
   }
 });

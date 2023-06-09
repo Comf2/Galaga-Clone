@@ -37,5 +37,5 @@ playerPrjImg.crossOrigin = true;
 const enemyPrjSrc = './assets/images/sprite-sheets/enemy-projectile.png';
 const enemyPrjImg = new Image();
 
-enemyPrjImg.src = enemyImageSrc;
+enemyPrjImg.src = enemyPrjSrc;
 enemyPrjImg.crossOrigin = true;

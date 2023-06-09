@@ -3,6 +3,10 @@ const dims = {
     width: 64,
     height: 61,
   },
+  projectile: {
+    width: 5,
+    height: 5,
+  },
   enemy: {
     stickbug: {
       width: 49,
