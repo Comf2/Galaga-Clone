@@ -43,7 +43,8 @@ class Character extends Sprite {
       0,
       startPos,
       endPosi,
-      10 // move count
+      100 // move count
+      //TODO: MAKE THIS A METHOD TO GET THE MOVECOUNT
     );
     prj.Fire();
   }

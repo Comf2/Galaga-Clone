@@ -1,4 +1,4 @@
-class ProjectileClass extends Sprite {
+class Projectile extends Sprite {
   constructor(image, sWidth, sHeight, x, y, startPos, endPos, moveCount) {
     super(image, sWidth, sHeight, x, y);
     this.isFiring = true;
@@ -14,14 +14,16 @@ class ProjectileClass extends Sprite {
   }
   Fire() {
     if (!this.isFiring) return;
+    const firePos = this.GetFirePos(this.startPos, this.endPos);
+
     if (
-      this.y <= 0 ||
-      this.y >= window.innerHeight ||
-      this.x <= 0 ||
-      this.x >= window.innerWidth
+      firePos.y <= 0 ||
+      firePos.y >= window.innerHeight ||
+      firePos.x <= 0 ||
+      firePos.x >= window.innerWidth
     ) {
-      console.log(this, 'offscreen');
       this.isFiring = false;
+      console.log('this is such a thing that exists omg');
       return;
     }
     const hit = this.Hit();
@@ -31,31 +33,29 @@ class ProjectileClass extends Sprite {
       return;
     }
     //not off screen didn't hit. Do Ray!
-    const fireDir = this.GetFirePos(this.startPos, this.endPos);
-    this.startPos.x = fireDir.x;
-    this.startPos.y = fireDir.y;
-    this.positions.x = fireDir.x;
-    this.positions.y = fireDir.y;
+    this.startPos.x = firePos.x;
+    this.startPos.y = firePos.y;
+    this.positions.x = firePos.x;
+    this.positions.y = firePos.y;
+
+    this.drawProjectile(firePos);
 
     requestAnimationFrame(this.Fire.bind(this));
   }
   GetFirePos(s, e) {
     //do formula to get new value
     //update positions.x
-    console.log('starting pos >>', s);
     const dp = {
       y: s.y - e.y,
       x: s.x - e.x,
     };
-    console.log('delta pos >>', dp);
     const fp = {
       y: dp.y / this.moveCount,
       x: dp.x / this.moveCount,
     };
-    console.log('final pos >>', fp);
     const np = {
-      y: s.y + fp.y,
-      x: s.x + fp.x,
+      y: s.y - fp.y,
+      x: s.x - fp.x,
     };
     console.log('nth pos >>', np);
     return np;
@@ -69,10 +69,13 @@ class ProjectileClass extends Sprite {
       didHit: false,
     };
   }
-}
-
-const createProjectile = () => ({})
-
-export { 
-  ProjectileClass
+  drawProjectile(firePos) {
+    c.drawImage(
+      playerPrjImg,
+      firePos.x,
+      firePos.y,
+      dims.projectile.width,
+      dims.projectile.height
+    );
+  }
 }

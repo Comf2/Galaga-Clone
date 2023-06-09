@@ -31,7 +31,7 @@ beeImg.crossOrigin = true;
 const playerPrjSrc = './assets/images/sprite-sheets/player-projectile.png';
 const playerPrjImg = new Image();
 
-playerPrjImg.src = playerImageSrc;
+playerPrjImg.src = playerPrjSrc;
 playerPrjImg.crossOrigin = true;
 
 const enemyPrjSrc = './assets/images/sprite-sheets/enemy-projectile.png';
