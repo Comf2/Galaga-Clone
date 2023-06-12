@@ -57,7 +57,8 @@ class Level {
             gameStartPos.enemy.y - 120,
             2,
             0,
-            1
+            1,
+            100
           );
           this.enemies.push(enemy);
         }

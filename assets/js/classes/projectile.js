@@ -10,12 +10,41 @@ class Projectile extends Sprite {
       x: endPos.x,
       y: endPos.y,
     };
+    this.speed = {
+      x:0,
+      y:0,
+    }
     this.moveCount = moveCount;
   }
   Fire() {
+    //TODO: Refactor to get spacing, and then increment by initial spacing
     if (!this.isFiring) return;
-    const firePos = this.GetFirePos(this.startPos, this.endPos);
+    
+    if(this.speed.x === 0 && this.speed.y === 0 ){
+      const initSpeed = this.GetSpeed(this.startPos, this.endPos)
+      this.speed.x = initSpeed.x;
+      this.speed.y = initSpeed.y;
+    }
+    const firePos = this.ChangePos(); 
+    const offScreen = this.CheckOffScreen(firePos);
+    if(offScreen) return;    
+    const hit = this.Hit();
+    if (hit.didHit === true) {
+      this.isFiring = false;
+      hit.enemy.damage(10);
+      return;
+    }
 
+    this.startPos.x = firePos.x;
+    this.startPos.y = firePos.y;
+    // this.positions.x = firePos.x;
+    // this.positions.y = firePos.y;
+
+    this.drawProjectile(firePos);
+
+    requestAnimationFrame(this.Fire.bind(this));
+  }
+  CheckOffScreen(firePos) {
     if (
       firePos.y <= 0 ||
       firePos.y >= window.innerHeight ||
@@ -24,23 +53,28 @@ class Projectile extends Sprite {
     ) {
       this.isFiring = false;
       console.log('this is such a thing that exists omg');
-      return;
+      return true;
     }
-    const hit = this.Hit();
-    if (hit.didHit === true) {
-      this.isFiring = false;
-      hit.enemy.damage(10);
-      return;
-    }
-    //not off screen didn't hit. Do Ray!
-    this.startPos.x = firePos.x;
-    this.startPos.y = firePos.y;
-    this.positions.x = firePos.x;
-    this.positions.y = firePos.y;
+    return false;
+  }
+  GetSpeed(s,e) {
+    const dp = {
+      y: s.y - e.y,
+      x: s.x - e.x,
+    };
+    const fp = {
+      y: dp.y / this.moveCount,
+      x: dp.x / this.moveCount,
+    };
+    return fp;
+  }
+  ChangePos(){
 
-    this.drawProjectile(firePos);
-
-    requestAnimationFrame(this.Fire.bind(this));
+    const np = {
+      y: this.startPos.y - this.speed.y,
+      x: this.startPos.x - this.speed.x,
+    };
+    return np;
   }
   GetFirePos(s, e) {
     //do formula to get new value
