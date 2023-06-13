@@ -1,20 +1,20 @@
-let state = 'StartScreen';
-let currentLevel = 0;
+let state = "StartScreen"
+let currentLevel = 0
 
 function updateLevel(currentLevel) {
-  currentLevel++;
-  console.log(currentLevel);
+  currentLevel++
+  console.log(currentLevel)
 }
 
-const startScreen = document.querySelector('.start-screen');
+const startScreen = document.querySelector(".start-screen")
 function CheckState() {
   switch (state) {
-    case 'startScreen':
-      console.log('start screen');
-      break;
-    case 'game':
-      startScreen.style.display = 'none';
-      level.playGame();
-      break;
+    case "startScreen":
+      console.log("start screen")
+      break
+    case "game":
+      startScreen.style.display = "none"
+      level.playGame()
+      break
   }
 }

@@ -1,4 +1,4 @@
-let gamePlaying = false;
+let gamePlaying = false
 
 //run animation class in player
 //when its over change bool
@@ -18,5 +18,5 @@ const player = new Player(
   0,
   5,
   100,
-  'enemy'
-);
+  "enemy"
+)

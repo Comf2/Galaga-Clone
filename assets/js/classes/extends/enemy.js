@@ -25,7 +25,7 @@ class Enemy extends Character {
       prjSpeed,
       fireRate,
       target
-    );
-    this.name = name;
+    )
+    this.name = name
   }
 }

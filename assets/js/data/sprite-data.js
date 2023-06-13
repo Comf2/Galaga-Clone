@@ -21,7 +21,7 @@ const dims = {
       height: 53,
     },
   },
-};
+}
 
 const gameStartPos = {
   player: {
@@ -31,4 +31,4 @@ const gameStartPos = {
   enemy: {
     y: 100,
   },
-};
+}

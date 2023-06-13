@@ -24,6 +24,6 @@ class Player extends Character {
       prjSpeed,
       fireRate,
       target
-    );
+    )
   }
 }

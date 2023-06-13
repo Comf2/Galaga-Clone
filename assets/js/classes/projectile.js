@@ -10,50 +10,50 @@ class Projectile extends Sprite {
     moveCount,
     target
   ) {
-    super(image, sWidth, sHeight, x, y);
-    this.isFiring = true;
+    super(image, sWidth, sHeight, x, y)
+    this.isFiring = true
     this.startPos = {
       x: startPos.x,
       y: startPos.y,
-    };
+    }
     this.endPos = {
       x: endPos.x,
       y: endPos.y,
-    };
+    }
     this.speed = {
       x: 0,
       y: 0,
-    };
-    this.moveCount = moveCount;
-    this.target = target;
+    }
+    this.moveCount = moveCount
+    this.target = target
   }
   Fire() {
-    if (!this.isFiring) return;
+    if (!this.isFiring) return
 
     if (this.speed.x === 0 && this.speed.y === 0) {
-      const initSpeed = this.GetSpeed(this.startPos, this.endPos);
-      this.speed.x = initSpeed.x;
-      this.speed.y = initSpeed.y;
+      const initSpeed = this.GetSpeed(this.startPos, this.endPos)
+      this.speed.x = initSpeed.x
+      this.speed.y = initSpeed.y
     }
-    const firePos = this.ChangePos();
-    const offScreen = this.CheckOffScreen(firePos);
-    if (offScreen) return;
-    const hit = this.Hit(firePos);
+    const firePos = this.ChangePos()
+    const offScreen = this.CheckOffScreen(firePos)
+    if (offScreen) return
+    const hit = this.Hit(firePos)
     if (hit.didHit === true) {
-      this.isFiring = false;
-      hit.enemy.damage(10);
-      return;
+      this.isFiring = false
+      hit.enemy.damage(10)
+      return
     }
 
-    this.startPos.x = firePos.x;
-    this.startPos.y = firePos.y;
-    this.positions.x = firePos.x;
-    this.positions.y = firePos.y;
-    this.UpdateSides();
+    this.startPos.x = firePos.x
+    this.startPos.y = firePos.y
+    this.positions.x = firePos.x
+    this.positions.y = firePos.y
+    this.UpdateSides()
 
-    this.drawProjectile(firePos);
+    this.drawProjectile(firePos)
 
-    requestAnimationFrame(this.Fire.bind(this));
+    requestAnimationFrame(this.Fire.bind(this))
   }
   CheckOffScreen(firePos) {
     if (
@@ -62,28 +62,28 @@ class Projectile extends Sprite {
       firePos.x <= 0 ||
       firePos.x >= window.innerWidth
     ) {
-      this.isFiring = false;
-      return true;
+      this.isFiring = false
+      return true
     }
-    return false;
+    return false
   }
   GetSpeed(s, e) {
     const dp = {
       y: s.y - e.y,
       x: s.x - e.x,
-    };
+    }
     const fp = {
       y: dp.y / this.moveCount,
       x: dp.x / this.moveCount,
-    };
-    return fp;
+    }
+    return fp
   }
   ChangePos() {
     const np = {
       y: this.startPos.y - this.speed.y,
       x: this.startPos.x - this.speed.x,
-    };
-    return np;
+    }
+    return np
   }
   GetFirePos(s, e) {
     //do formula to get new value
@@ -91,30 +91,30 @@ class Projectile extends Sprite {
     const dp = {
       y: s.y - e.y,
       x: s.x - e.x,
-    };
+    }
     const fp = {
       y: dp.y / this.moveCount,
       x: dp.x / this.moveCount,
-    };
+    }
     const np = {
       y: s.y - fp.y,
       x: s.x - fp.x,
-    };
-    return np;
+    }
+    return np
   }
   Hit(firePos) {
-    let didHit;
-    if (this.target === 'enemy') {
-      didHit = this.CheckEnemyHit(firePos);
+    let didHit
+    if (this.target === "enemy") {
+      didHit = this.CheckEnemyHit(firePos)
     } else {
-      didHit = this.checkPlayerHit(firePos);
+      didHit = this.checkPlayerHit(firePos)
     }
     //loop through and check collision
     //return after
     return {
       enemy: null,
       didHit: false,
-    };
+    }
   }
   CheckEnemyHit(firePos) {
     level.enemies.forEach((enemy) => {
@@ -124,14 +124,14 @@ class Projectile extends Sprite {
         this.sides.bottom >= enemy.sides.top &&
         this.sides.top <= enemy.sides.bottom
       ) {
-        console.log('collided!');
+        console.log("collided!")
       } else {
-        console.log('no collision! :<<');
+        console.log("no collision! :<<")
       }
-    });
+    })
   }
   checkPlayerHit() {
-    FirePos;
+    FirePos
   }
   drawProjectile(firePos) {
     c.drawImage(
@@ -140,6 +140,6 @@ class Projectile extends Sprite {
       firePos.y,
       dims.projectile.width,
       dims.projectile.height
-    );
+    )
   }
 }
