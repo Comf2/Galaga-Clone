@@ -48,7 +48,7 @@ class Level {
             10 + enemyAmmountMulti,
             availEnemies[curEnemy].width
           );
-          const enemy = new Character(
+          const enemy = new Enemy(
             availEnemies[curEnemy].image,
             availEnemies[curEnemy].width,
             availEnemies[curEnemy].height,
@@ -58,7 +58,10 @@ class Level {
             2,
             0,
             1,
-            100
+            100, //prj speed
+            150, // firerate
+            'player', // target
+            availEnemies[curEnemy].name
           );
           this.enemies.push(enemy);
         }

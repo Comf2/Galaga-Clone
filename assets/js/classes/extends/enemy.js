@@ -1,4 +1,4 @@
-class Player extends Character {
+class Enemy extends Character {
   constructor(
     image,
     sWidth,
@@ -10,7 +10,8 @@ class Player extends Character {
     dir,
     prjSpeed,
     fireRate,
-    target
+    target,
+    name
   ) {
     super(
       image,
@@ -25,5 +26,6 @@ class Player extends Character {
       fireRate,
       target
     );
+    this.name = name;
   }
 }

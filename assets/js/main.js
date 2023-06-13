@@ -23,13 +23,16 @@ document.addEventListener('keydown', (e) => {
   } else if (state === 'game' && level.levelStarted === true) {
     if (e.key === 'w' || e.key === 'ArrowUp') {
       player.movement.movingUp = true;
-    } else if (e.key === 'd' || e.key === 'ArrowRight') {
-      player.movement.movingRight = true;
     } else if (e.key === 's' || e.key === 'ArrowDown') {
       player.movement.movingDown = true;
+    }
+    if (e.key === 'd' || e.key === 'ArrowRight') {
+      player.movement.movingRight = true;
     } else if (e.key === 'a' || e.key === 'ArrowLeft') {
       player.movement.movingLeft = true;
-    } else if (e.code === 'Space' && player.canFire) {
+    }
+
+    if (e.code === 'Space' && player.canFire) {
       player.canFire = false;
       player.Fire(
         {
@@ -45,11 +48,14 @@ document.addEventListener('keyup', (e) => {
   if (state === 'game' && level.levelStarted === true) {
     if (e.key === 'w' || e.key === 'ArrowUp') {
       player.movement.movingUp = false;
-    } else if (e.key === 'd' || e.key === 'ArrowRight') {
+    }
+    if (e.key === 'd' || e.key === 'ArrowRight') {
       player.movement.movingRight = false;
-    } else if (e.key === 's' || e.key === 'ArrowDown') {
+    }
+    if (e.key === 's' || e.key === 'ArrowDown') {
       player.movement.movingDown = false;
-    } else if (e.key === 'a' || e.key === 'ArrowLeft') {
+    }
+    if (e.key === 'a' || e.key === 'ArrowLeft') {
       player.movement.movingLeft = false;
     }
   }

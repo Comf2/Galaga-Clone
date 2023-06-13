@@ -1,5 +1,15 @@
 class Projectile extends Sprite {
-  constructor(image, sWidth, sHeight, x, y, startPos, endPos, moveCount) {
+  constructor(
+    image,
+    sWidth,
+    sHeight,
+    x,
+    y,
+    startPos,
+    endPos,
+    moveCount,
+    target
+  ) {
     super(image, sWidth, sHeight, x, y);
     this.isFiring = true;
     this.startPos = {
@@ -11,24 +21,24 @@ class Projectile extends Sprite {
       y: endPos.y,
     };
     this.speed = {
-      x:0,
-      y:0,
-    }
+      x: 0,
+      y: 0,
+    };
     this.moveCount = moveCount;
+    this.target = target;
   }
   Fire() {
-    //TODO: Refactor to get spacing, and then increment by initial spacing
     if (!this.isFiring) return;
-    
-    if(this.speed.x === 0 && this.speed.y === 0 ){
-      const initSpeed = this.GetSpeed(this.startPos, this.endPos)
+
+    if (this.speed.x === 0 && this.speed.y === 0) {
+      const initSpeed = this.GetSpeed(this.startPos, this.endPos);
       this.speed.x = initSpeed.x;
       this.speed.y = initSpeed.y;
     }
-    const firePos = this.ChangePos(); 
+    const firePos = this.ChangePos();
     const offScreen = this.CheckOffScreen(firePos);
-    if(offScreen) return;    
-    const hit = this.Hit();
+    if (offScreen) return;
+    const hit = this.Hit(firePos);
     if (hit.didHit === true) {
       this.isFiring = false;
       hit.enemy.damage(10);
@@ -37,8 +47,9 @@ class Projectile extends Sprite {
 
     this.startPos.x = firePos.x;
     this.startPos.y = firePos.y;
-    // this.positions.x = firePos.x;
-    // this.positions.y = firePos.y;
+    this.positions.x = firePos.x;
+    this.positions.y = firePos.y;
+    this.UpdateSides();
 
     this.drawProjectile(firePos);
 
@@ -57,7 +68,7 @@ class Projectile extends Sprite {
     }
     return false;
   }
-  GetSpeed(s,e) {
+  GetSpeed(s, e) {
     const dp = {
       y: s.y - e.y,
       x: s.x - e.x,
@@ -68,8 +79,7 @@ class Projectile extends Sprite {
     };
     return fp;
   }
-  ChangePos(){
-
+  ChangePos() {
     const np = {
       y: this.startPos.y - this.speed.y,
       x: this.startPos.x - this.speed.x,
@@ -94,14 +104,42 @@ class Projectile extends Sprite {
     console.log('nth pos >>', np);
     return np;
   }
-  Hit() {
-    //check if projectile hit any enemy
-    //if it did return obj with enemy, and true
-    //else return null and false
+  Hit(firePos) {
+    let didHit;
+    if (this.target === 'enemy') {
+      didHit = this.CheckEnemyHit(firePos);
+    } else {
+      didHit = this.checkPlayerHit(firePos);
+    }
+    //loop through and check collision
+    //return after
     return {
       enemy: null,
       didHit: false,
     };
+  }
+  CheckEnemyHit(firePos) {
+    level.enemies.forEach((enemy) => {
+      if (
+        enemy.sides.right <= this.sides.left &&
+        enemy.sides.bottom <= this.sides.bottom
+      ) {
+        alert('collided!');
+      } else if (
+        enemy.sides.top <= this.sides.bottom &&
+        enemy.sides.bottom >= this.sides.top &&
+        enemy.sides.right >= this.sides.left &&
+        enemy.sides.left <= this.sides.right
+      ) {
+        alert('what do you call a fish with no is');
+      } else {
+        alert('no hit ');
+      }
+    });
+    return 'it hit thing';
+  }
+  checkPlayerHit() {
+    FirePos;
   }
   drawProjectile(firePos) {
     c.drawImage(

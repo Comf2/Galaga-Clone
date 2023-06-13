@@ -13,6 +13,12 @@ class Sprite {
       x: frameX,
       y: frameY,
     };
+    this.sides = {
+      top: this.positions.y,
+      bottom: this.positions.y + this.height,
+      left: this.positions.x,
+      right: this.positions.x + this.width,
+    };
   }
   draw() {
     c.drawImage(
@@ -26,5 +32,11 @@ class Sprite {
       this.width,
       this.height
     );
+  }
+  UpdateSides() {
+    this.sides.top = this.positions.y;
+    this.sides.bottom = this.positions.y + this.height;
+    this.sides.left = this.positions.left;
+    this.sides.right = this.positions.x + this.width;
   }
 }

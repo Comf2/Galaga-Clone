@@ -1,5 +1,17 @@
 class Character extends Sprite {
-  constructor(image, sWidth, sHeight, x, y, frameX, frameY, dir, prjSpeed) {
+  constructor(
+    image,
+    sWidth,
+    sHeight,
+    x,
+    y,
+    frameX,
+    frameY,
+    dir,
+    prjSpeed,
+    fireRate,
+    target
+  ) {
     super(image, sWidth, sHeight, x, y, frameX, frameY, dir);
     this.movement = {
       movingUp: false,
@@ -10,6 +22,8 @@ class Character extends Sprite {
     this.currentDir = dir;
     this.canFire = true;
     this.prjSpeed = prjSpeed;
+    this.fireRate = fireRate;
+    this.target = target;
   }
   Move() {
     if (this.movement.movingUp) {
@@ -29,9 +43,9 @@ class Character extends Sprite {
   Fire(endPos, image) {
     setTimeout(() => {
       this.canFire = true;
-    }, 300);
+    }, this.fireRate);
     const startPos = {
-      x: this.positions.x,
+      x: this.positions.x + this.width / 2,
       y: this.positions.y,
     };
     const endPosi = endPos;
@@ -45,8 +59,8 @@ class Character extends Sprite {
       0,
       startPos,
       endPosi,
-      this.GetMoveCount(startPos, endPosi) // move count
-      //TODO: MAKE THIS A METHOD TO GET THE MOVECOUNT
+      this.GetMoveCount(startPos, endPosi),
+      this.target
     );
     prj.Fire();
   }
@@ -54,9 +68,10 @@ class Character extends Sprite {
     //TODO: Add health
   }
   GetMoveCount(startPos, endPos) {
-    const s = startPos, e = endPos;
-    const d = Math.sqrt(Math.pow(e.x - s.x, 2) + Math.pow(e.y - s.y, 2))
-    const moveCount = d/this.prjSpeed;
-    return(moveCount);
+    const s = startPos,
+      e = endPos;
+    const d = Math.sqrt(Math.pow(e.x - s.x, 2) + Math.pow(e.y - s.y, 2));
+    const moveCount = d / this.prjSpeed;
+    return moveCount;
   }
 }

@@ -7,7 +7,7 @@ let gamePlaying = false;
 //make initial animation connected to level class
 //make a level manager
 
-const player = new Character(
+const player = new Player(
   playerImage,
   dims.player.width,
   dims.player.height,
@@ -16,5 +16,7 @@ const player = new Character(
   1,
   0,
   0,
-  5
+  5,
+  100,
+  'enemy'
 );
