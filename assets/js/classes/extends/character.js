@@ -49,8 +49,6 @@ class Character extends Sprite {
       y: this.positions.y,
     };
     const endPosi = endPos;
-    console.log('starting position >>', startPos);
-    //TODO: Make shoot from center
     const prj = new Projectile(
       image,
       dims.projectile.width,

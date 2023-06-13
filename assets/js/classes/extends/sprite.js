@@ -36,7 +36,7 @@ class Sprite {
   UpdateSides() {
     this.sides.top = this.positions.y;
     this.sides.bottom = this.positions.y + this.height;
-    this.sides.left = this.positions.left;
+    this.sides.left = this.positions.x;
     this.sides.right = this.positions.x + this.width;
   }
 }

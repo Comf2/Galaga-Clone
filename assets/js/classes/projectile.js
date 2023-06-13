@@ -63,7 +63,6 @@ class Projectile extends Sprite {
       firePos.x >= window.innerWidth
     ) {
       this.isFiring = false;
-      console.log('this is such a thing that exists omg');
       return true;
     }
     return false;
@@ -101,7 +100,6 @@ class Projectile extends Sprite {
       y: s.y - fp.y,
       x: s.x - fp.x,
     };
-    console.log('nth pos >>', np);
     return np;
   }
   Hit(firePos) {
@@ -121,22 +119,16 @@ class Projectile extends Sprite {
   CheckEnemyHit(firePos) {
     level.enemies.forEach((enemy) => {
       if (
-        enemy.sides.right <= this.sides.left &&
-        enemy.sides.bottom <= this.sides.bottom
+        this.sides.right >= enemy.sides.left &&
+        this.sides.left <= enemy.sides.right &&
+        this.sides.bottom >= enemy.sides.top &&
+        this.sides.top <= enemy.sides.bottom
       ) {
-        alert('collided!');
-      } else if (
-        enemy.sides.top <= this.sides.bottom &&
-        enemy.sides.bottom >= this.sides.top &&
-        enemy.sides.right >= this.sides.left &&
-        enemy.sides.left <= this.sides.right
-      ) {
-        alert('what do you call a fish with no is');
+        console.log('collided!');
       } else {
-        alert('no hit ');
+        console.log('no collision! :<<');
       }
     });
-    return 'it hit thing';
   }
   checkPlayerHit() {
     FirePos;
