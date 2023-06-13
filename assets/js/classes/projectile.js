@@ -125,15 +125,8 @@ class Projectile extends Sprite {
         this.sides.top <= enemy.sides.bottom
       ) {
         console.log('collided!');
-      } else if (
-        enemy.sides.top <= this.sides.bottom &&
-        enemy.sides.bottom >= this.sides.top &&
-        enemy.sides.right >= this.sides.left &&
-        enemy.sides.left <= this.sides.right
-      ) {
-        console.log('what do you call a fish with no is');
       } else {
-        alert('no hit ');
+        console.log('no collision! :<<');
       }
     });
   }
